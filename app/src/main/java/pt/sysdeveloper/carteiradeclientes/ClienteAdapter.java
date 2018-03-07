@@ -1,6 +1,7 @@
 package pt.sysdeveloper.carteiradeclientes;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -23,12 +24,24 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ViewHold
 
     @Override
     public ClienteAdapter.ViewHolderCliente onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View view = layoutInflater.inflate(R.layout.linha_clientes, parent, false);
+
+        ViewHolderCliente holderCliente = new ViewHolderCliente(view);
+
+        return holderCliente;
     }
 
     @Override
     public void onBindViewHolder(ClienteAdapter.ViewHolderCliente holder, int position) {
 
+        if((dados != null) && (dados.size() > 0)) {
+            Cliente cliente = dados.get(position);
+
+            holder.txtNome.setText(cliente.nome);
+            holder.txtTelefone.setText(cliente.telefone);
+        }
     }
 
     @Override
